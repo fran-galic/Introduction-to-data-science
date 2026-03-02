@@ -1,0 +1,20 @@
+ML priprema skupa early_predictors_final -> early_predictors_ml
+
+1) Missing vrijednosti i imputacija
+- date_registration: dodan indikator date_registration_missing; imputacija medijanom (-57.000).
+- delay_first_assessment: dodan indikator delay_first_assessment_missing; imputacija medijanom (-1.000).
+- score_first_assessment: missing -> 0 (broj imputiranih: 0).
+
+2) Ciljna varijabla
+- final_result se zadržava kao multiclass cilj (bez enkodiranja u ovoj fazi).
+
+3) Enkodiranje kategorijskih varijabli (one-hot)
+- One-hot enkodirane varijable: highest_education, age_band, gender, disability, first_assessment_type
+- drop_first=False (model može sam regularizirati; kasnije po potrebi možeš promijeniti).
+
+4) Redoslijed stupaca
+- Redoslijed: META (id + course) -> TARGET -> numeričke -> indikatori missing -> one-hot stupci
+
+5) Spremanje
+- Parquet: processed_data/early_predictors_ml.parquet
+- CSV: processed_data/early_predictors_ml.csv
